@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Salmahdy Counter️</title>
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  font-family:'Segoe UI',sans-serif;
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:linear-gradient(135deg,#0f172a,#1e1b4b,#312e81);
+  color:white;
+  padding:20px;
+}
+
+.container{
+  width:100%;
+  max-width:1000px;
+  text-align:center;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+}
+
+h1{
+  font-size:2.5rem;
+  margin-bottom:35px;
+  text-shadow:0 0 15px rgba(255,255,255,.25);
+}
+
+.grid{
+  width:100%;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
+  gap:20px;
+}
+
+.box{
+  position:relative;
+  padding:28px 15px;
+  border-radius:22px;
+  background:rgba(255,255,255,0.08);
+  backdrop-filter:blur(12px);
+  border:1px solid rgba(255,255,255,0.15);
+  box-shadow:
+    0 8px 32px rgba(0,0,0,.35),
+    inset 0 0 10px rgba(255,255,255,.05);
+  transition:.3s;
+  overflow:hidden;
+}
+
+.box::before{
+  content:"";
+  position:absolute;
+  top:0;
+  left:-100%;
+  width:100%;
+  height:100%;
+  background:linear-gradient(
+    90deg,
+    transparent,
+    rgba(255,255,255,.15),
+    transparent
+  );
+  transition:.6s;
+}
+
+.box:hover{
+  transform:translateY(-8px) scale(1.03);
+}
+
+.box:hover::before{
+  left:100%;
+}
+
+.box span{
+  display:block;
+  font-size:2.3rem;
+  font-weight:700;
+  margin-bottom:10px;
+}
+
+.box p{
+  opacity:.8;
+}
+
+.footer-text{
+  margin-top:60px;
+  width:80%;
+  max-width:700px;
+  font-size:1.2rem;
+  line-height:1.8;
+  padding:20px;
+  background:rgba(255,255,255,0.05);
+  border:1px solid rgba(255,255,255,0.12);
+  border-radius:18px;
+  backdrop-filter:blur(10px);
+  box-shadow:0 8px 20px rgba(0,0,0,.25);
+}
+
+.footer-text span{
+  display:block;
+  margin-top:8px;
+  font-size:1.35rem;
+  font-weight:700;
+  color:#ff9ecf;
+}
+
+@media(max-width:600px){
+  h1{
+    font-size:1.8rem;
+  }
+
+  .grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .box span{
+    font-size:1.8rem;
+  }
+
+  .footer-text{
+    width:100%;
+    font-size:1rem;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <h1>بصي بقالنا قد ايههه مع بعض</h1>
+
+  <div class="grid">
+    <div class="box"><span id="years">0</span><p>سنين</p></div>
+    <div class="box"><span id="months">0</span><p>شهور</p></div>
+    <div class="box"><span id="weeks">0</span><p>أسابيع</p></div>
+    <div class="box"><span id="days">0</span><p>أيام</p></div>
+    <div class="box"><span id="hours">0</span><p>ساعات</p></div>
+    <div class="box"><span id="minutes">0</span><p>دقايق</p></div>
+    <div class="box"><span id="seconds">0</span><p>ثواني</p></div>
+  </div>
+
+  <div class="footer-text">
+      عارفه لو وقففف 🔪  
+      <span>عقبال م نكمل 100 سنة يلولييي </span>
+  </div>
+
+</div>
+
+<script>
+// غير التاريخ هنا لوقت الرسالة
+const startDate = new Date("2026-04-24T03:26:00");
+
+function updateCounter(){
+
+  const now = new Date();
+  let diff = Math.floor((now - startDate)/1000);
+
+  let years = Math.floor(diff/(365*24*60*60));
+  diff %= (365*24*60*60);
+
+  let months = Math.floor(diff/(30*24*60*60));
+  diff %= (30*24*60*60);
+
+  let weeks = Math.floor(diff/(7*24*60*60));
+  diff %= (7*24*60*60);
+
+  let days = Math.floor(diff/(24*60*60));
+  diff %= (24*60*60);
+
+  let hours = Math.floor(diff/(60*60));
+  diff %= (60*60);
+
+  let minutes = Math.floor(diff/60);
+  let seconds = diff%60;
+
+  document.getElementById("years").innerText = years;
+  document.getElementById("months").innerText = months;
+  document.getElementById("weeks").innerText = weeks;
+  document.getElementById("days").innerText = days;
+  document.getElementById("hours").innerText = hours;
+  document.getElementById("minutes").innerText = minutes;
+  document.getElementById("seconds").innerText = seconds;
+}
+
+setInterval(updateCounter,1000);
+updateCounter();
+</script>
+
+</body>
+</html>
